@@ -7,7 +7,7 @@ from torch.nn.parallel import DistributedDataParallel as DDP
 from yolox.core import launch
 from yolox.exp import get_exp
 from yolox.utils import configure_nccl, fuse_model, get_local_rank, get_model_info, setup_logger
-from yolox.evaluators import MOTEvaluator
+from yolox.evaluators import LOAFEvaluator
 
 import argparse
 import os
@@ -165,7 +165,7 @@ def main(exp, args, num_gpu):
     #logger.info("Model Structure:\n{}".format(str(model)))
 
     val_loader = exp.get_eval_loader(args.batch_size, is_distributed, args.test)
-    evaluator = MOTEvaluator(
+    evaluator = LOAFEvaluator(
         args=args,
         dataloader=val_loader,
         img_size=exp.test_size,
@@ -196,7 +196,7 @@ def main(exp, args, num_gpu):
     if args.fuse:
         logger.info("\tFusing model...")
         model = fuse_model(model)
-
+    # Don't use TensorRT 
     if args.trt:
         assert (
             not args.fuse and not is_distributed and args.batch_size == 1
@@ -216,19 +216,20 @@ def main(exp, args, num_gpu):
         model, is_distributed, args.fp16, trt_file, decoder, exp.test_size, results_folder
     )
     logger.info("\n" + summary)
-
+    '''
     # evaluate MOTA
     mm.lap.default_solver = 'lap'
 
-    if exp.val_ann == 'val_half.json':
-        gt_type = '_val_half'
-    else:
-        gt_type = ''
+    # if exp.val_ann == 'val_half.json':
+    #     gt_type = '_val_half'
+    # else:
+    gt_type = ''
     print('gt_type', gt_type)
-    if args.mot20:
-        gtfiles = glob.glob(os.path.join('datasets/MOT20/train', '*/gt/gt{}.txt'.format(gt_type)))
-    else:
-        gtfiles = glob.glob(os.path.join('datasets/mot/train', '*/gt/gt{}.txt'.format(gt_type)))
+    # if args.mot20:
+    #     gtfiles = glob.glob(os.path.join('datasets/MOT20/train', '*/gt/gt{}.txt'.format(gt_type)))
+    # else:
+        # modify the ground truth txt file here
+    gtfiles = glob.glob(os.path.join('datasets/MOT17/train', '*/gt/gt{}.txt'.format(gt_type)))
     print('gt_files', gtfiles)
     tsfiles = [f for f in glob.glob(os.path.join(results_folder, '*.txt')) if not os.path.basename(f).startswith('eval')]
 
@@ -269,7 +270,7 @@ def main(exp, args, num_gpu):
     summary = mh.compute_many(accs, names=names, metrics=metrics, generate_overall=True)
     print(mm.io.render_summary(summary, formatters=mh.formatters, namemap=mm.io.motchallenge_metric_names))
     logger.info('Completed')
-
+    '''
 
 if __name__ == "__main__":
     args = make_parser().parse_args()

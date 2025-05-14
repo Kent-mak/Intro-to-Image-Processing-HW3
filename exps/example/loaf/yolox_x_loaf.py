@@ -15,10 +15,10 @@ class Exp(MyExp):
         self.depth = 1.33
         self.width = 1.25
         self.exp_name = os.path.split(os.path.realpath(__file__))[1].split(".")[0]
-        self.train_ann = "train.json" 
-        self.val_ann = "val_half.json"  # Set validation set annotation file 
-        self.input_size = (800, 1440)
-        self.test_size = (800, 1440)
+        self.train_ann = "resolution_512/instances_train.json" 
+        self.val_ann = "resolution_512/instances_test.json"  # Set validation set annotation file 
+        self.input_size = (512, 512)
+        self.test_size = (512, 512)
         self.random_size = (18, 32)
         self.max_epoch = 80
         self.print_interval = 20
@@ -31,7 +31,7 @@ class Exp(MyExp):
 
     def get_data_loader(self, batch_size, is_distributed, no_aug=False):
         from yolox.data import (
-            MOTDataset,
+            LOAFDataset,
             TrainTransform,
             YoloBatchSampler,
             DataLoader,
@@ -39,10 +39,10 @@ class Exp(MyExp):
             MosaicDetection,
         )
 
-        dataset = MOTDataset(
-            data_dir=os.path.join(get_yolox_datadir(), "mix_mot_ch"), # modify here for dataset
+        dataset = LOAFDataset(
+            data_dir=os.path.join(get_yolox_datadir(), "LOAF_512"), # modify here for dataset
             json_file=self.train_ann,
-            name='',
+            name='train',
             img_size=self.input_size,
             preproc=TrainTransform(
                 rgb_means=(0.485, 0.456, 0.406),
@@ -92,13 +92,13 @@ class Exp(MyExp):
         return train_loader
 
     def get_eval_loader(self, batch_size, is_distributed, testdev=False):
-        from yolox.data import MOTDataset, ValTransform
+        from yolox.data import LOAFDataset, ValTransform
 
-        valdataset = MOTDataset(
-            data_dir=os.path.join(get_yolox_datadir(), "mot"),
+        valdataset = LOAFDataset(
+            data_dir=os.path.join(get_yolox_datadir(), "LOAF_512"), # Dataset directory
             json_file=self.val_ann,
             img_size=self.test_size,
-            name='train',
+            name='test', # the set to perform inference on
             preproc=ValTransform(
                 rgb_means=(0.485, 0.456, 0.406),
                 std=(0.229, 0.224, 0.225),

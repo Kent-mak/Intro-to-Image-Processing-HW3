@@ -16,9 +16,9 @@ class Exp(MyExp):
         self.width = 1.25
         self.exp_name = os.path.split(os.path.realpath(__file__))[1].split(".")[0]
         self.train_ann = "train.json" 
-        self.val_ann = "val_half.json"  # Set validation set annotation file 
-        self.input_size = (800, 1440)
-        self.test_size = (800, 1440)
+        self.val_ann = "train.json"  # Set validation set annotation file 
+        self.input_size = (1280, 1280)
+        self.test_size = (1280, 1280)
         self.random_size = (18, 32)
         self.max_epoch = 80
         self.print_interval = 20
@@ -31,7 +31,7 @@ class Exp(MyExp):
 
     def get_data_loader(self, batch_size, is_distributed, no_aug=False):
         from yolox.data import (
-            MOTDataset,
+            F8kDataset,
             TrainTransform,
             YoloBatchSampler,
             DataLoader,
@@ -39,8 +39,8 @@ class Exp(MyExp):
             MosaicDetection,
         )
 
-        dataset = MOTDataset(
-            data_dir=os.path.join(get_yolox_datadir(), "mix_mot_ch"), # modify here for dataset
+        dataset = F8kDataset(
+            data_dir=os.path.join(get_yolox_datadir(), "train"), # modify here for dataset
             json_file=self.train_ann,
             name='',
             img_size=self.input_size,
@@ -92,13 +92,13 @@ class Exp(MyExp):
         return train_loader
 
     def get_eval_loader(self, batch_size, is_distributed, testdev=False):
-        from yolox.data import MOTDataset, ValTransform
+        from yolox.data import F8kDataset, ValTransform
 
-        valdataset = MOTDataset(
-            data_dir=os.path.join(get_yolox_datadir(), "mot"),
+        valdataset = F8kDataset(
+            data_dir=os.path.join(get_yolox_datadir(), "Fisheye8K"),
             json_file=self.val_ann,
             img_size=self.test_size,
-            name='train',
+            name='train/images_padded', #MODIFY DATA FOLDER
             preproc=ValTransform(
                 rgb_means=(0.485, 0.456, 0.406),
                 std=(0.229, 0.224, 0.225),
@@ -124,10 +124,10 @@ class Exp(MyExp):
         return val_loader
 
     def get_evaluator(self, batch_size, is_distributed, testdev=False):
-        from yolox.evaluators import COCOEvaluator
+        from yolox.evaluators import F8KEvaluator
 
         val_loader = self.get_eval_loader(batch_size, is_distributed, testdev=testdev)
-        evaluator = COCOEvaluator(
+        evaluator = F8KEvaluator(
             dataloader=val_loader,
             img_size=self.test_size,
             confthre=self.test_conf,

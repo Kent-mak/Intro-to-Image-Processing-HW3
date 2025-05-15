@@ -5,3 +5,4 @@
 from .coco_evaluator import COCOEvaluator
 from .mot_evaluator import MOTEvaluator
 from .loaf_evaluator import LOAFEvaluator
+from .F8k_evaluator import F8KEvaluator

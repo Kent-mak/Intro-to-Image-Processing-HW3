@@ -7,7 +7,7 @@ from torch.nn.parallel import DistributedDataParallel as DDP
 from yolox.core import launch
 from yolox.exp import get_exp
 from yolox.utils import configure_nccl, fuse_model, get_local_rank, get_model_info, setup_logger
-from yolox.evaluators import LOAFEvaluator
+from yolox.evaluators import F8KEvaluator
 
 import argparse
 import os
@@ -147,7 +147,7 @@ def main(exp, args, num_gpu):
     if rank == 0:
         os.makedirs(file_name, exist_ok=True)
 
-    results_folder = os.path.join(file_name, "track_results_val") #modify for results folder
+    results_folder = os.path.join(file_name, "track_results_train")
     os.makedirs(results_folder, exist_ok=True)
 
     setup_logger(file_name, distributed_rank=rank, filename="val_log.txt", mode="a")
@@ -165,7 +165,7 @@ def main(exp, args, num_gpu):
     #logger.info("Model Structure:\n{}".format(str(model)))
 
     val_loader = exp.get_eval_loader(args.batch_size, is_distributed, args.test)
-    evaluator = LOAFEvaluator(
+    evaluator = F8KEvaluator(
         args=args,
         dataloader=val_loader,
         img_size=exp.test_size,

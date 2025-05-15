@@ -1,0 +1,274 @@
+2025-05-05 03:13:05.741 | INFO     | __main__:main:154 - Args: Namespace(experiment_name='yolox_x_mot17', name=None, dist_backend='nccl', dist_url=None, batch_size=1, devices=1, local_rank=0, num_machines=1, machine_rank=0, exp_file='exps/example/mot/yolox_x_mot17.py', fp16=True, fuse=True, trt=False, test=False, speed=False, opts=[], ckpt='pretrained/bytetrack_x_mot17.pth.tar', conf=0.01, nms=0.7, tsize=None, seed=None, track_thresh=0.6, track_buffer=30, match_thresh=0.9, min_box_area=100, mot20=False)
+2025-05-05 03:13:06.207 | INFO     | __main__:main:164 - Model Summary: Params: 99.00M, Gflops: 793.21
+2025-05-05 03:13:06.207 | INFO     | yolox.data.datasets.mot:__init__:39 - loading annotations into memory...
+2025-05-05 03:13:06.221 | INFO     | yolox.data.datasets.mot:__init__:39 - Done (t=0.01s)
+2025-05-05 03:13:06.221 | INFO     | pycocotools.coco:__init__:88 - creating index...
+2025-05-05 03:13:06.222 | INFO     | pycocotools.coco:__init__:88 - index created!
+2025-05-05 03:13:06.372 | INFO     | __main__:main:186 - loading checkpoint
+2025-05-05 03:13:06.753 | INFO     | __main__:main:191 - loaded checkpoint done.
+2025-05-05 03:13:06.753 | INFO     | __main__:main:197 - 	Fusing model...
+2025-05-05 03:13:06.760 | ERROR    | yolox.core.launch:launch:90 - An error has been caught in function 'launch', process 'MainProcess' (50408), thread 'MainThread' (131986393438016):
+Traceback (most recent call last):
+
+  File "/home/kent/Desktop/NYCU/Image Processing/HW3/ByteTrack/tools/track_mot17.py", line 286, in <module>
+    launch(
+    └ <function launch at 0x780971a8c310>
+
+> File "/home/kent/Desktop/NYCU/Image Processing/HW3/ByteTrack/yolox/core/launch.py", line 90, in launch
+    main_func(*args)
+    │          └ (╒══════════════════╤════════════════════════════════════════════════════════════════════════════════════════════════════════...
+    └ <function main at 0x780920760d30>
+
+  File "/home/kent/Desktop/NYCU/Image Processing/HW3/ByteTrack/tools/track_mot17.py", line 198, in main
+    model = fuse_model(model)
+            │          └ YOLOX(
+            │              (backbone): YOLOPAFPN(
+            │                (backbone): CSPDarknet(
+            │                  (stem): Focus(
+            │                    (conv): BaseConv(
+            │                      (conv): ...
+            └ <function fuse_model at 0x780965274790>
+
+  File "/home/kent/Desktop/NYCU/Image Processing/HW3/ByteTrack/yolox/utils/model_utils.py", line 71, in fuse_model
+    m.conv = fuse_conv_and_bn(m.conv, m.bn)  # update conv
+    │        │                │       └ BaseConv(
+    │        │                │           (conv): Conv2d(12, 80, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    │        │                │           (bn): BatchNorm2d(80, eps...
+    │        │                └ BaseConv(
+    │        │                    (conv): Conv2d(12, 80, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    │        │                    (bn): BatchNorm2d(80, eps...
+    │        └ <function fuse_conv_and_bn at 0x7809652745e0>
+    └ BaseConv(
+        (conv): Conv2d(12, 80, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn): BatchNorm2d(80, eps...
+
+  File "/home/kent/Desktop/NYCU/Image Processing/HW3/ByteTrack/yolox/utils/model_utils.py", line 49, in fuse_conv_and_bn
+    w_bn = torch.diag(bn.weight.div(torch.sqrt(bn.eps + bn.running_var)))
+           │     │    │             │     │    │  │     └ BatchNorm2d(80, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+           │     │    │             │     │    │  └ 0.001
+           │     │    │             │     │    └ BatchNorm2d(80, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+           │     │    │             │     └ <built-in method sqrt of type object at 0x780a7039ef40>
+           │     │    │             └ <module 'torch' from '/home/kent/anaconda3/envs/image_processing_hw3/lib/python3.10/site-packages/torch/__init__.py'>
+           │     │    └ BatchNorm2d(80, eps=0.001, momentum=0.03, affine=True, track_running_stats=True)
+           │     └ <built-in method diag of type object at 0x780a7039ef40>
+           └ <module 'torch' from '/home/kent/anaconda3/envs/image_processing_hw3/lib/python3.10/site-packages/torch/__init__.py'>
+
+RuntimeError: CUDA error: no kernel image is available for execution on the device
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-05-05 03:26:04.116 | INFO     | __main__:main:154 - Args: Namespace(experiment_name='yolox_x_mot17', name=None, dist_backend='nccl', dist_url=None, batch_size=1, devices=1, local_rank=0, num_machines=1, machine_rank=0, exp_file='exps/example/mot/yolox_x_mot17.py', fp16=True, fuse=True, trt=False, test=False, speed=False, opts=[], ckpt='pretrained/bytetrack_x_mot17.pth.tar', conf=0.01, nms=0.7, tsize=None, seed=None, track_thresh=0.6, track_buffer=30, match_thresh=0.9, min_box_area=100, mot20=False)
+2025-05-05 03:26:04.525 | INFO     | __main__:main:164 - Model Summary: Params: 99.00M, Gflops: 793.21
+2025-05-05 03:26:04.525 | INFO     | yolox.data.datasets.mot:__init__:39 - loading annotations into memory...
+2025-05-05 03:26:04.539 | INFO     | yolox.data.datasets.mot:__init__:39 - Done (t=0.01s)
+2025-05-05 03:26:04.539 | INFO     | pycocotools.coco:__init__:88 - creating index...
+2025-05-05 03:26:04.539 | INFO     | pycocotools.coco:__init__:88 - index created!
+2025-05-05 03:26:04.684 | INFO     | __main__:main:186 - loading checkpoint
+2025-05-05 03:26:04.895 | INFO     | __main__:main:191 - loaded checkpoint done.
+2025-05-05 03:26:04.895 | INFO     | __main__:main:197 - 	Fusing model...
+2025-05-05 03:26:05.886 | ERROR    | yolox.core.launch:launch:90 - An error has been caught in function 'launch', process 'MainProcess' (51347), thread 'MainThread' (139367525816128):
+Traceback (most recent call last):
+
+  File "/home/kent/Desktop/NYCU/Image Processing/HW3/ByteTrack/tools/track_mot17.py", line 286, in <module>
+    launch(
+    └ <function launch at 0x7ebfc14039a0>
+
+> File "/home/kent/Desktop/NYCU/Image Processing/HW3/ByteTrack/yolox/core/launch.py", line 90, in launch
+    main_func(*args)
+    │          └ (╒══════════════════╤══════════════════════════════════════════════════════════════════════════════════════════════╕
+    │            │ keys  ...
+    └ <function main at 0x7ebf7c9f2830>
+
+  File "/home/kent/Desktop/NYCU/Image Processing/HW3/ByteTrack/tools/track_mot17.py", line 215, in main
+    *_, summary = evaluator.evaluate(
+                  │         └ <function MOTEvaluator.evaluate at 0x7ebf7ec3a440>
+                  └ <yolox.evaluators.mot_evaluator.MOTEvaluator object at 0x7ebf2835de70>
+
+  File "/home/kent/Desktop/NYCU/Image Processing/HW3/ByteTrack/yolox/evaluators/mot_evaluator.py", line 190, in evaluate
+    online_targets = tracker.update(outputs[0], info_imgs, self.img_size)
+                     │       │      │           │          │    └ (800, 1440)
+                     │       │      │           │          └ <yolox.evaluators.mot_evaluator.MOTEvaluator object at 0x7ebf2835de70>
+                     │       │      │           └ [tensor([1080]), tensor([1920]), tensor([1]), tensor([1]), ['MOT17-01-DPM/img1/000001.jpg']]
+                     │       │      └ [tensor([[7.2750e+02, 3.3875e+02, 7.8350e+02, 4.7675e+02, 9.9609e-01, 9.3066e-01,
+                     │       │                 0.0000e+00],
+                     │       │                [5.3450e+02, ...
+                     │       └ <function BYTETracker.update at 0x7ebf807ec9d0>
+                     └ <yolox.tracker.byte_tracker.BYTETracker object at 0x7ebf7a692aa0>
+
+  File "/home/kent/Desktop/NYCU/Image Processing/HW3/ByteTrack/yolox/tracker/byte_tracker.py", line 189, in update
+    detections = [STrack(STrack.tlbr_to_tlwh(tlbr), s) for
+                  │      │      └ <staticmethod(<function STrack.tlbr_to_tlwh at 0x7ebf807ec790>)>
+                  │      └ <class 'yolox.tracker.byte_tracker.STrack'>
+                  └ <class 'yolox.tracker.byte_tracker.STrack'>
+
+  File "/home/kent/Desktop/NYCU/Image Processing/HW3/ByteTrack/yolox/tracker/byte_tracker.py", line 189, in <listcomp>
+    detections = [STrack(STrack.tlbr_to_tlwh(tlbr), s) for
+                  │      │      │            │      └ np.float32(0.92702866)
+                  │      │      │            └ array([ 982.12506,  457.3125 , 1057.725  ,  643.61255], dtype=float32)
+                  │      │      └ <staticmethod(<function STrack.tlbr_to_tlwh at 0x7ebf807ec790>)>
+                  │      └ <class 'yolox.tracker.byte_tracker.STrack'>
+                  └ <class 'yolox.tracker.byte_tracker.STrack'>
+
+  File "/home/kent/Desktop/NYCU/Image Processing/HW3/ByteTrack/yolox/tracker/byte_tracker.py", line 18, in __init__
+    self._tlwh = np.asarray(tlwh, dtype=np.float)
+    │            │  │       │           └ <module 'numpy' from '/home/kent/anaconda3/envs/image_processing_hw3/lib/python3.10/site-packages/numpy/__init__.py'>
+    │            │  │       └ array([982.12506 , 457.3125  ,  75.599915, 186.30005 ], dtype=float32)
+    │            │  └ <built-in function asarray>
+    │            └ <module 'numpy' from '/home/kent/anaconda3/envs/image_processing_hw3/lib/python3.10/site-packages/numpy/__init__.py'>
+    └ OT_0_(0-0)
+
+  File "/home/kent/anaconda3/envs/image_processing_hw3/lib/python3.10/site-packages/numpy/__init__.py", line 397, in __getattr__
+    raise AttributeError(__former_attrs__[attr], name=None)
+                         │                └ 'float'
+                         └ {'object': "module 'numpy' has no attribute 'object'.\n`np.object` was a deprecated alias for the builtin `object`. To avoid ...
+
+AttributeError: module 'numpy' has no attribute 'float'.
+`np.float` was a deprecated alias for the builtin `float`. To avoid this error in existing code, use `float` by itself. Doing this will not modify any behavior and is safe. If you specifically wanted the numpy scalar type, use `np.float64` here.
+The aliases was originally deprecated in NumPy 1.20; for more details and guidance see the original release note at:
+    https://numpy.org/devdocs/release/1.20.0-notes.html#deprecations
+2025-05-05 03:27:47.577 | INFO     | __main__:main:154 - Args: Namespace(experiment_name='yolox_x_mot17', name=None, dist_backend='nccl', dist_url=None, batch_size=1, devices=1, local_rank=0, num_machines=1, machine_rank=0, exp_file='exps/example/mot/yolox_x_mot17.py', fp16=True, fuse=True, trt=False, test=False, speed=False, opts=[], ckpt='pretrained/bytetrack_x_mot17.pth.tar', conf=0.01, nms=0.7, tsize=None, seed=None, track_thresh=0.6, track_buffer=30, match_thresh=0.9, min_box_area=100, mot20=False)
+2025-05-05 03:27:48.017 | INFO     | __main__:main:164 - Model Summary: Params: 99.00M, Gflops: 793.21
+2025-05-05 03:27:48.018 | INFO     | yolox.data.datasets.mot:__init__:39 - loading annotations into memory...
+2025-05-05 03:27:48.031 | INFO     | yolox.data.datasets.mot:__init__:39 - Done (t=0.01s)
+2025-05-05 03:27:48.031 | INFO     | pycocotools.coco:__init__:88 - creating index...
+2025-05-05 03:27:48.032 | INFO     | pycocotools.coco:__init__:88 - index created!
+2025-05-05 03:27:48.178 | INFO     | __main__:main:186 - loading checkpoint
+2025-05-05 03:27:48.403 | INFO     | __main__:main:191 - loaded checkpoint done.
+2025-05-05 03:27:48.404 | INFO     | __main__:main:197 - 	Fusing model...
+2025-05-05 03:27:49.347 | ERROR    | yolox.core.launch:launch:90 - An error has been caught in function 'launch', process 'MainProcess' (51501), thread 'MainThread' (127610369824576):
+Traceback (most recent call last):
+
+  File "/home/kent/Desktop/NYCU/Image Processing/HW3/ByteTrack/tools/track_mot17.py", line 286, in <module>
+    launch(
+    └ <function launch at 0x740e5420b9a0>
+
+> File "/home/kent/Desktop/NYCU/Image Processing/HW3/ByteTrack/yolox/core/launch.py", line 90, in launch
+    main_func(*args)
+    │          └ (╒══════════════════╤══════════════════════════════════════════════════════════════════════════════════════════════╕
+    │            │ keys  ...
+    └ <function main at 0x740e0f8367a0>
+
+  File "/home/kent/Desktop/NYCU/Image Processing/HW3/ByteTrack/tools/track_mot17.py", line 215, in main
+    *_, summary = evaluator.evaluate(
+                  │         └ <function MOTEvaluator.evaluate at 0x740e11aaa3b0>
+                  └ <yolox.evaluators.mot_evaluator.MOTEvaluator object at 0x740de415af20>
+
+  File "/home/kent/Desktop/NYCU/Image Processing/HW3/ByteTrack/yolox/evaluators/mot_evaluator.py", line 190, in evaluate
+    online_targets = tracker.update(outputs[0], info_imgs, self.img_size)
+                     │       │      │           │          │    └ (800, 1440)
+                     │       │      │           │          └ <yolox.evaluators.mot_evaluator.MOTEvaluator object at 0x740de415af20>
+                     │       │      │           └ [tensor([1080]), tensor([1920]), tensor([1]), tensor([1]), ['MOT17-01-DPM/img1/000001.jpg']]
+                     │       │      └ [tensor([[7.2750e+02, 3.3875e+02, 7.8350e+02, 4.7675e+02, 9.9609e-01, 9.3066e-01,
+                     │       │                 0.0000e+00],
+                     │       │                [5.3450e+02, ...
+                     │       └ <function BYTETracker.update at 0x740e13648940>
+                     └ <yolox.tracker.byte_tracker.BYTETracker object at 0x740e0d5c10f0>
+
+  File "/home/kent/Desktop/NYCU/Image Processing/HW3/ByteTrack/yolox/tracker/byte_tracker.py", line 207, in update
+    dists = matching.iou_distance(strack_pool, detections)
+            │        │            │            └ [OT_0_(0-0), OT_0_(0-0), OT_0_(0-0), OT_0_(0-0), OT_0_(0-0), OT_0_(0-0), OT_0_(0-0), OT_0_(0-0), OT_0_(0-0), OT_0_(0-0), OT_0...
+            │        │            └ []
+            │        └ <function iou_distance at 0x740e13ee77f0>
+            └ <module 'yolox.tracker.matching' from '/home/kent/Desktop/NYCU/Image Processing/HW3/ByteTrack/yolox/tracker/matching.py'>
+
+  File "/home/kent/Desktop/NYCU/Image Processing/HW3/ByteTrack/yolox/tracker/matching.py", line 88, in iou_distance
+    _ious = ious(atlbrs, btlbrs)
+            │    │       └ [array([ 982.12506104,  457.3125    , 1057.72497559,  643.61254883]), array([721.57501221, 458.6625061 , 766.125     , 588.93...
+            │    └ []
+            └ <function ious at 0x740e13ee5c60>
+
+  File "/home/kent/Desktop/NYCU/Image Processing/HW3/ByteTrack/yolox/tracker/matching.py", line 61, in ious
+    ious = np.zeros((len(atlbrs), len(btlbrs)), dtype=np.float)
+           │  │          │            │               └ <module 'numpy' from '/home/kent/anaconda3/envs/image_processing_hw3/lib/python3.10/site-packages/numpy/__init__.py'>
+           │  │          │            └ [array([ 982.12506104,  457.3125    , 1057.72497559,  643.61254883]), array([721.57501221, 458.6625061 , 766.125     , 588.93...
+           │  │          └ []
+           │  └ <built-in function zeros>
+           └ <module 'numpy' from '/home/kent/anaconda3/envs/image_processing_hw3/lib/python3.10/site-packages/numpy/__init__.py'>
+
+  File "/home/kent/anaconda3/envs/image_processing_hw3/lib/python3.10/site-packages/numpy/__init__.py", line 397, in __getattr__
+    raise AttributeError(__former_attrs__[attr], name=None)
+                         │                └ 'float'
+                         └ {'object': "module 'numpy' has no attribute 'object'.\n`np.object` was a deprecated alias for the builtin `object`. To avoid ...
+
+AttributeError: module 'numpy' has no attribute 'float'.
+`np.float` was a deprecated alias for the builtin `float`. To avoid this error in existing code, use `float` by itself. Doing this will not modify any behavior and is safe. If you specifically wanted the numpy scalar type, use `np.float64` here.
+The aliases was originally deprecated in NumPy 1.20; for more details and guidance see the original release note at:
+    https://numpy.org/devdocs/release/1.20.0-notes.html#deprecations
+2025-05-05 03:28:43.419 | INFO     | __main__:main:154 - Args: Namespace(experiment_name='yolox_x_mot17', name=None, dist_backend='nccl', dist_url=None, batch_size=1, devices=1, local_rank=0, num_machines=1, machine_rank=0, exp_file='exps/example/mot/yolox_x_mot17.py', fp16=True, fuse=True, trt=False, test=False, speed=False, opts=[], ckpt='pretrained/bytetrack_x_mot17.pth.tar', conf=0.01, nms=0.7, tsize=None, seed=None, track_thresh=0.6, track_buffer=30, match_thresh=0.9, min_box_area=100, mot20=False)
+2025-05-05 03:28:43.841 | INFO     | __main__:main:164 - Model Summary: Params: 99.00M, Gflops: 793.21
+2025-05-05 03:28:43.842 | INFO     | yolox.data.datasets.mot:__init__:39 - loading annotations into memory...
+2025-05-05 03:28:43.856 | INFO     | yolox.data.datasets.mot:__init__:39 - Done (t=0.01s)
+2025-05-05 03:28:43.856 | INFO     | pycocotools.coco:__init__:88 - creating index...
+2025-05-05 03:28:43.856 | INFO     | pycocotools.coco:__init__:88 - index created!
+2025-05-05 03:28:44.002 | INFO     | __main__:main:186 - loading checkpoint
+2025-05-05 03:28:44.218 | INFO     | __main__:main:191 - loaded checkpoint done.
+2025-05-05 03:28:44.218 | INFO     | __main__:main:197 - 	Fusing model...
+2025-05-05 03:28:55.497 | INFO     | yolox.evaluators.mot_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_mot17/track_results/MOT17-01-DPM.txt
+2025-05-05 03:29:06.073 | INFO     | yolox.evaluators.mot_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_mot17/track_results/MOT17-01-FRCNN.txt
+2025-05-05 03:29:16.493 | INFO     | yolox.evaluators.mot_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_mot17/track_results/MOT17-01-SDP.txt
+2025-05-05 03:29:54.454 | INFO     | yolox.evaluators.mot_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_mot17/track_results/MOT17-03-DPM.txt
+2025-05-05 03:30:32.915 | INFO     | yolox.evaluators.mot_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_mot17/track_results/MOT17-03-FRCNN.txt
+2025-05-05 03:31:10.850 | INFO     | yolox.evaluators.mot_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_mot17/track_results/MOT17-03-SDP.txt
+2025-05-05 03:31:38.486 | INFO     | yolox.evaluators.mot_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_mot17/track_results/MOT17-06-DPM.txt
+2025-05-05 03:32:06.156 | INFO     | yolox.evaluators.mot_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_mot17/track_results/MOT17-06-FRCNN.txt
+2025-05-05 03:32:33.780 | INFO     | yolox.evaluators.mot_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_mot17/track_results/MOT17-06-SDP.txt
+2025-05-05 03:32:45.676 | INFO     | yolox.evaluators.mot_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_mot17/track_results/MOT17-07-DPM.txt
+2025-05-05 03:32:57.548 | INFO     | yolox.evaluators.mot_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_mot17/track_results/MOT17-07-FRCNN.txt
+2025-05-05 03:33:09.377 | INFO     | yolox.evaluators.mot_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_mot17/track_results/MOT17-07-SDP.txt
+2025-05-05 03:33:24.172 | INFO     | yolox.evaluators.mot_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_mot17/track_results/MOT17-08-DPM.txt
+2025-05-05 03:33:39.277 | INFO     | yolox.evaluators.mot_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_mot17/track_results/MOT17-08-FRCNN.txt
+2025-05-05 03:33:54.242 | INFO     | yolox.evaluators.mot_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_mot17/track_results/MOT17-08-SDP.txt
+2025-05-05 03:34:15.246 | INFO     | yolox.evaluators.mot_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_mot17/track_results/MOT17-12-DPM.txt
+2025-05-05 03:34:36.111 | INFO     | yolox.evaluators.mot_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_mot17/track_results/MOT17-12-FRCNN.txt
+2025-05-05 03:34:56.900 | INFO     | yolox.evaluators.mot_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_mot17/track_results/MOT17-12-SDP.txt
+2025-05-05 03:35:14.604 | INFO     | yolox.evaluators.mot_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_mot17/track_results/MOT17-14-DPM.txt
+2025-05-05 03:35:32.349 | INFO     | yolox.evaluators.mot_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_mot17/track_results/MOT17-14-FRCNN.txt
+2025-05-05 03:35:49.702 | INFO     | yolox.evaluators.mot_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_mot17/track_results/MOT17-14-SDP.txt
+2025-05-05 03:35:49.724 | INFO     | yolox.evaluators.mot_evaluator:evaluate_prediction:628 - Evaluate in main process...
+2025-05-05 03:35:52.972 | INFO     | yolox.evaluators.mot_evaluator:evaluate_prediction:657 - Loading and preparing results...
+2025-05-05 03:35:54.705 | INFO     | yolox.evaluators.mot_evaluator:evaluate_prediction:657 - DONE (t=1.73s)
+2025-05-05 03:35:54.713 | INFO     | pycocotools.coco:loadRes:363 - creating index...
+2025-05-05 03:35:54.882 | INFO     | pycocotools.coco:loadRes:363 - index created!
+2025-05-05 03:35:56.940 | INFO     | __main__:main:218 - 
+Average forward time: 16.73 ms, Average track time: 1.75 ms, Average inference time: 18.48 ms
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = -1.000
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = -1.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = -1.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = -1.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = -1.000
+
+2025-05-05 03:35:56.941 | INFO     | __main__:main:236 - Found 0 groundtruths and 21 test files.
+2025-05-05 03:35:56.941 | INFO     | __main__:main:237 - Available LAP solvers ['lap', 'scipy']
+2025-05-05 03:35:56.941 | INFO     | __main__:main:238 - Default LAP solver 'lap'
+2025-05-05 03:35:56.941 | INFO     | __main__:main:239 - Loading files.
+2025-05-05 03:35:58.664 | WARNING  | __main__:compare_dataframes:122 - No ground truth for MOT17-14-DPM, skipping.
+2025-05-05 03:35:58.664 | WARNING  | __main__:compare_dataframes:122 - No ground truth for MOT17-01-DPM, skipping.
+2025-05-05 03:35:58.664 | WARNING  | __main__:compare_dataframes:122 - No ground truth for MOT17-03-SDP, skipping.
+2025-05-05 03:35:58.664 | WARNING  | __main__:compare_dataframes:122 - No ground truth for MOT17-06-FRCNN, skipping.
+2025-05-05 03:35:58.664 | WARNING  | __main__:compare_dataframes:122 - No ground truth for MOT17-08-FRCNN, skipping.
+2025-05-05 03:35:58.664 | WARNING  | __main__:compare_dataframes:122 - No ground truth for MOT17-12-DPM, skipping.
+2025-05-05 03:35:58.665 | WARNING  | __main__:compare_dataframes:122 - No ground truth for MOT17-07-SDP, skipping.
+2025-05-05 03:35:58.665 | WARNING  | __main__:compare_dataframes:122 - No ground truth for MOT17-12-SDP, skipping.
+2025-05-05 03:35:58.665 | WARNING  | __main__:compare_dataframes:122 - No ground truth for MOT17-08-SDP, skipping.
+2025-05-05 03:35:58.665 | WARNING  | __main__:compare_dataframes:122 - No ground truth for MOT17-07-FRCNN, skipping.
+2025-05-05 03:35:58.665 | WARNING  | __main__:compare_dataframes:122 - No ground truth for MOT17-01-FRCNN, skipping.
+2025-05-05 03:35:58.665 | WARNING  | __main__:compare_dataframes:122 - No ground truth for MOT17-08-DPM, skipping.
+2025-05-05 03:35:58.665 | WARNING  | __main__:compare_dataframes:122 - No ground truth for MOT17-03-FRCNN, skipping.
+2025-05-05 03:35:58.665 | WARNING  | __main__:compare_dataframes:122 - No ground truth for MOT17-14-FRCNN, skipping.
+2025-05-05 03:35:58.665 | WARNING  | __main__:compare_dataframes:122 - No ground truth for MOT17-07-DPM, skipping.
+2025-05-05 03:35:58.665 | WARNING  | __main__:compare_dataframes:122 - No ground truth for MOT17-06-DPM, skipping.
+2025-05-05 03:35:58.665 | WARNING  | __main__:compare_dataframes:122 - No ground truth for MOT17-12-FRCNN, skipping.
+2025-05-05 03:35:58.665 | WARNING  | __main__:compare_dataframes:122 - No ground truth for MOT17-03-DPM, skipping.
+2025-05-05 03:35:58.665 | WARNING  | __main__:compare_dataframes:122 - No ground truth for MOT17-01-SDP, skipping.
+2025-05-05 03:35:58.665 | WARNING  | __main__:compare_dataframes:122 - No ground truth for MOT17-14-SDP, skipping.
+2025-05-05 03:35:58.665 | WARNING  | __main__:compare_dataframes:122 - No ground truth for MOT17-06-SDP, skipping.
+2025-05-05 03:35:58.665 | INFO     | __main__:main:247 - Running metrics
+2025-05-05 03:35:58.669 | INFO     | __main__:main:272 - Completed

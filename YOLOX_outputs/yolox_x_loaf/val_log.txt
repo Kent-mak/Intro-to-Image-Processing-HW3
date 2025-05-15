@@ -1,0 +1,381 @@
+2025-05-12 22:04:48.548 | INFO     | __main__:main:154 - Args: Namespace(experiment_name='yolox_x_loaf', name=None, dist_backend='nccl', dist_url=None, batch_size=1, devices=1, local_rank=0, num_machines=1, machine_rank=0, exp_file='exps/example/loaf/yolox_x_loaf.py', fp16=True, fuse=True, trt=False, test=False, speed=False, opts=[], ckpt='pretrained/bytetrack_x_mot17.pth.tar', conf=0.01, nms=0.7, tsize=None, seed=None, track_thresh=0.6, track_buffer=30, match_thresh=0.9, min_box_area=100, mot20=False)
+2025-05-12 22:04:48.988 | INFO     | __main__:main:164 - Model Summary: Params: 99.00M, Gflops: 180.50
+2025-05-12 22:04:48.989 | INFO     | yolox.data.datasets.loaf:__init__:28 - loading annotations into memory...
+2025-05-12 22:04:49.920 | INFO     | yolox.data.datasets.loaf:__init__:28 - Done (t=0.93s)
+2025-05-12 22:04:49.920 | INFO     | pycocotools.coco:__init__:88 - creating index...
+2025-05-12 22:04:49.943 | INFO     | pycocotools.coco:__init__:88 - index created!
+2025-05-12 22:04:50.147 | INFO     | __main__:main:186 - loading checkpoint
+2025-05-12 22:04:50.374 | INFO     | __main__:main:191 - loaded checkpoint done.
+2025-05-12 22:04:50.375 | INFO     | __main__:main:197 - 	Fusing model...
+2025-05-12 22:04:56.905 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0059.txt
+2025-05-12 22:05:03.048 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0060.txt
+2025-05-12 22:05:09.717 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0061.txt
+2025-05-12 22:05:16.639 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0063.txt
+2025-05-12 22:05:23.533 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0053.txt
+2025-05-12 22:05:29.347 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0064.txt
+2025-05-12 22:05:36.261 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0066.txt
+2025-05-12 22:05:44.404 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0067.txt
+2025-05-12 22:05:51.257 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0068.txt
+2025-05-12 22:05:58.199 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0069.txt
+2025-05-12 22:06:05.770 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0070.txt
+2025-05-12 22:06:12.661 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0072.txt
+2025-05-12 22:06:19.473 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0073.txt
+2025-05-12 22:06:26.188 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0074.txt
+2025-05-12 22:06:33.028 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0057.txt
+2025-05-12 22:06:33.049 | ERROR    | yolox.core.launch:launch:90 - An error has been caught in function 'launch', process 'MainProcess' (6088), thread 'MainThread' (128078257739584):
+Traceback (most recent call last):
+
+  File "/home/kent/Desktop/NYCU/Image Processing/HW3/ByteTrack/tools/track_loaf.py", line 286, in <module>
+    launch(
+    └ <function launch at 0x747b4460f9a0>
+
+> File "/home/kent/Desktop/NYCU/Image Processing/HW3/ByteTrack/yolox/core/launch.py", line 90, in launch
+    main_func(*args)
+    │          └ (╒══════════════════╤══════════════════════════════════════════════════════════════════════════════════════════════╕
+    │            │ keys  ...
+    └ <function main at 0x747affd172e0>
+
+  File "/home/kent/Desktop/NYCU/Image Processing/HW3/ByteTrack/tools/track_loaf.py", line 215, in main
+    *_, summary = evaluator.evaluate(
+                  │         └ <function LOAFEvaluator.evaluate at 0x747b01ffb130>
+                  └ <yolox.evaluators.loaf_evaluator.LOAFEvaluator object at 0x747af40dc100>
+
+  File "/home/kent/Desktop/NYCU/Image Processing/HW3/ByteTrack/yolox/evaluators/loaf_evaluator.py", line 200, in evaluate
+    eval_results = self.evaluate_prediction(data_list, statistics)
+                   │                        │          └ tensor([6.3232e+01, 3.9548e+00, 8.7720e+03], device='cuda:0')
+                   │                        └ [{'image_id': 0, 'category_id': 1, 'bbox': [68.9375, 97.5, 75.3125, 68.25], 'score': 0.5199418067932129, 'segmentation': []},...
+                   └ <yolox.evaluators.loaf_evaluator.LOAFEvaluator object at 0x747af40dc100>
+
+AttributeError: 'LOAFEvaluator' object has no attribute 'evaluate_prediction'
+2025-05-12 22:10:12.555 | INFO     | __main__:main:154 - Args: Namespace(experiment_name='yolox_x_loaf', name=None, dist_backend='nccl', dist_url=None, batch_size=1, devices=1, local_rank=0, num_machines=1, machine_rank=0, exp_file='exps/example/loaf/yolox_x_loaf.py', fp16=True, fuse=True, trt=False, test=False, speed=False, opts=[], ckpt='pretrained/bytetrack_x_mot17.pth.tar', conf=0.01, nms=0.7, tsize=None, seed=None, track_thresh=0.6, track_buffer=30, match_thresh=0.9, min_box_area=100, mot20=False)
+2025-05-12 22:10:12.980 | INFO     | __main__:main:164 - Model Summary: Params: 99.00M, Gflops: 180.50
+2025-05-12 22:10:12.980 | INFO     | yolox.data.datasets.loaf:__init__:28 - loading annotations into memory...
+2025-05-12 22:10:13.909 | INFO     | yolox.data.datasets.loaf:__init__:28 - Done (t=0.93s)
+2025-05-12 22:10:13.909 | INFO     | pycocotools.coco:__init__:88 - creating index...
+2025-05-12 22:10:13.934 | INFO     | pycocotools.coco:__init__:88 - index created!
+2025-05-12 22:10:14.143 | INFO     | __main__:main:186 - loading checkpoint
+2025-05-12 22:10:14.358 | INFO     | __main__:main:191 - loaded checkpoint done.
+2025-05-12 22:10:14.358 | INFO     | __main__:main:197 - 	Fusing model...
+2025-05-12 22:10:20.957 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0059.txt
+2025-05-12 22:10:27.193 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0060.txt
+2025-05-12 22:10:33.862 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0061.txt
+2025-05-12 22:10:40.743 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0063.txt
+2025-05-12 22:10:47.721 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0053.txt
+2025-05-12 22:10:53.534 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0064.txt
+2025-05-12 22:11:00.468 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0066.txt
+2025-05-12 22:11:08.629 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0067.txt
+2025-05-12 22:11:15.579 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0068.txt
+2025-05-12 22:11:22.453 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0069.txt
+2025-05-12 22:11:29.939 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0070.txt
+2025-05-12 22:11:36.822 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0072.txt
+2025-05-12 22:11:43.711 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0073.txt
+2025-05-12 22:11:50.365 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0074.txt
+2025-05-12 22:11:57.207 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0057.txt
+2025-05-12 22:11:57.225 | INFO     | yolox.evaluators.loaf_evaluator:evaluate_prediction:609 - Evaluate in main process...
+2025-05-12 22:11:57.780 | INFO     | yolox.evaluators.loaf_evaluator:evaluate_prediction:638 - Loading and preparing results...
+2025-05-12 22:11:58.182 | INFO     | yolox.evaluators.loaf_evaluator:evaluate_prediction:638 - DONE (t=0.40s)
+2025-05-12 22:11:58.182 | INFO     | pycocotools.coco:loadRes:363 - creating index...
+2025-05-12 22:11:58.213 | INFO     | pycocotools.coco:loadRes:363 - index created!
+2025-05-12 22:11:58.973 | INFO     | __main__:main:218 - 
+Average forward time: 7.23 ms, Average track time: 0.45 ms, Average inference time: 7.69 ms
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.036
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.104
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.018
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.026
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.069
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.207
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.019
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.061
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.077
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.057
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.132
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.261
+
+2025-05-15 21:25:00.525 | INFO     | __main__:main:154 - Args: Namespace(experiment_name='yolox_x_loaf', name=None, dist_backend='nccl', dist_url=None, batch_size=1, devices=1, local_rank=0, num_machines=1, machine_rank=0, exp_file='exps/example/loaf/yolox_x_loaf.py', fp16=True, fuse=True, trt=False, test=False, speed=False, opts=[], ckpt='pretrained/bytetrack_x_mot17.pth.tar', conf=0.01, nms=0.7, tsize=None, seed=None, track_thresh=0.6, track_buffer=30, match_thresh=0.9, min_box_area=100, mot20=False)
+2025-05-15 21:25:01.067 | INFO     | __main__:main:164 - Model Summary: Params: 99.00M, Gflops: 180.50
+2025-05-15 21:25:01.067 | INFO     | yolox.data.datasets.loaf:__init__:28 - loading annotations into memory...
+2025-05-15 21:25:02.101 | INFO     | yolox.data.datasets.loaf:__init__:28 - Done (t=1.03s)
+2025-05-15 21:25:02.102 | INFO     | pycocotools.coco:__init__:88 - creating index...
+2025-05-15 21:25:02.129 | INFO     | pycocotools.coco:__init__:88 - index created!
+2025-05-15 21:25:02.357 | INFO     | __main__:main:186 - loading checkpoint
+2025-05-15 21:25:02.791 | INFO     | __main__:main:191 - loaded checkpoint done.
+2025-05-15 21:25:02.791 | INFO     | __main__:main:197 - 	Fusing model...
+2025-05-15 21:25:03.220 | ERROR    | yolox.core.launch:launch:90 - An error has been caught in function 'launch', process 'MainProcess' (292680), thread 'MainThread' (124883081115456):
+Traceback (most recent call last):
+
+  File "/home/kent/Desktop/NYCU/Image Processing/HW3/ByteTrack/tools/track_loaf.py", line 286, in <module>
+    launch(
+    └ <function launch at 0x71935510b9a0>
+
+> File "/home/kent/Desktop/NYCU/Image Processing/HW3/ByteTrack/yolox/core/launch.py", line 90, in launch
+    main_func(*args)
+    │          └ (╒══════════════════╤══════════════════════════════════════════════════════════════════════════════════════════════╕
+    │            │ keys  ...
+    └ <function main at 0x7193106f7e20>
+
+  File "/home/kent/Desktop/NYCU/Image Processing/HW3/ByteTrack/tools/track_loaf.py", line 215, in main
+    *_, summary = evaluator.evaluate(
+                  │         └ <function LOAFEvaluator.evaluate at 0x719312947760>
+                  └ <yolox.evaluators.loaf_evaluator.LOAFEvaluator object at 0x71934a3bdcf0>
+
+  File "/home/kent/Desktop/NYCU/Image Processing/HW3/ByteTrack/yolox/evaluators/loaf_evaluator.py", line 131, in evaluate
+    for cur_iter, (imgs, _, info_imgs, ids) in enumerate(
+                                       └ []
+
+  File "/home/kent/anaconda3/envs/image_processing_hw3/lib/python3.10/site-packages/tqdm/std.py", line 1181, in __iter__
+    for obj in iterable:
+               └ <torch.utils.data.dataloader.DataLoader object at 0x71949a8abc70>
+  File "/home/kent/anaconda3/envs/image_processing_hw3/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 733, in __next__
+    data = self._next_data()
+           │    └ <function _MultiProcessingDataLoaderIter._next_data at 0x71939c18d510>
+           └ <torch.utils.data.dataloader._MultiProcessingDataLoaderIter object at 0x71930e383700>
+  File "/home/kent/anaconda3/envs/image_processing_hw3/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1515, in _next_data
+    return self._process_data(data, worker_id)
+           │    │             │     └ 0
+           │    │             └ <torch._utils.ExceptionWrapper object at 0x71930e381f00>
+           │    └ <function _MultiProcessingDataLoaderIter._process_data at 0x71939c18d630>
+           └ <torch.utils.data.dataloader._MultiProcessingDataLoaderIter object at 0x71930e383700>
+  File "/home/kent/anaconda3/envs/image_processing_hw3/lib/python3.10/site-packages/torch/utils/data/dataloader.py", line 1550, in _process_data
+    data.reraise()
+    │    └ <function ExceptionWrapper.reraise at 0x719499b7c040>
+    └ <torch._utils.ExceptionWrapper object at 0x71930e381f00>
+  File "/home/kent/anaconda3/envs/image_processing_hw3/lib/python3.10/site-packages/torch/_utils.py", line 750, in reraise
+    raise exception
+          └ AssertionError('Caught AssertionError in DataLoader worker process 0.\nOriginal Traceback (most recent call last):\n  File "/...
+
+AssertionError: Caught AssertionError in DataLoader worker process 0.
+Original Traceback (most recent call last):
+  File "/home/kent/anaconda3/envs/image_processing_hw3/lib/python3.10/site-packages/torch/utils/data/_utils/worker.py", line 349, in _worker_loop
+    data = fetcher.fetch(index)  # type: ignore[possibly-undefined]
+  File "/home/kent/anaconda3/envs/image_processing_hw3/lib/python3.10/site-packages/torch/utils/data/_utils/fetch.py", line 52, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/home/kent/anaconda3/envs/image_processing_hw3/lib/python3.10/site-packages/torch/utils/data/_utils/fetch.py", line 52, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/home/kent/Desktop/NYCU/Image Processing/HW3/ByteTrack/yolox/data/datasets/datasets_wrapper.py", line 121, in wrapper
+    ret_val = getitem_fn(self, index)
+  File "/home/kent/Desktop/NYCU/Image Processing/HW3/ByteTrack/yolox/data/datasets/loaf.py", line 94, in __getitem__
+    img, target, img_info, img_id = self.pull_item(index)
+  File "/home/kent/Desktop/NYCU/Image Processing/HW3/ByteTrack/yolox/data/datasets/loaf.py", line 88, in pull_item
+    assert img is not None, f"Image not found at {img_file}"
+AssertionError: Image not found at /home/kent/Desktop/NYCU/Image Processing/HW3/ByteTrack/datasets/LOAF_512/train/0059_00000.jpg
+
+2025-05-15 21:27:07.807 | INFO     | __main__:main:154 - Args: Namespace(experiment_name='yolox_x_loaf', name=None, dist_backend='nccl', dist_url=None, batch_size=1, devices=1, local_rank=0, num_machines=1, machine_rank=0, exp_file='exps/example/loaf/yolox_x_loaf.py', fp16=True, fuse=True, trt=False, test=False, speed=False, opts=[], ckpt='pretrained/bytetrack_x_mot17.pth.tar', conf=0.01, nms=0.7, tsize=None, seed=None, track_thresh=0.6, track_buffer=30, match_thresh=0.9, min_box_area=100, mot20=False)
+2025-05-15 21:27:08.369 | INFO     | __main__:main:164 - Model Summary: Params: 99.00M, Gflops: 180.50
+2025-05-15 21:27:08.369 | INFO     | yolox.data.datasets.loaf:__init__:28 - loading annotations into memory...
+2025-05-15 21:27:11.622 | INFO     | yolox.data.datasets.loaf:__init__:28 - Done (t=3.25s)
+2025-05-15 21:27:11.622 | INFO     | pycocotools.coco:__init__:88 - creating index...
+2025-05-15 21:27:11.719 | INFO     | pycocotools.coco:__init__:88 - index created!
+2025-05-15 21:27:12.643 | INFO     | __main__:main:186 - loading checkpoint
+2025-05-15 21:27:12.872 | INFO     | __main__:main:191 - loaded checkpoint done.
+2025-05-15 21:27:12.873 | INFO     | __main__:main:197 - 	Fusing model...
+2025-05-15 21:27:20.438 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0000.txt
+2025-05-15 21:27:27.132 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0001.txt
+2025-05-15 21:27:33.605 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0002.txt
+2025-05-15 21:27:40.243 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0003.txt
+2025-05-15 21:27:46.958 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0004.txt
+2025-05-15 21:27:53.734 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0005.txt
+2025-05-15 21:27:59.278 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0006.txt
+2025-05-15 21:28:05.810 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0007.txt
+2025-05-15 21:28:12.379 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0008.txt
+2025-05-15 21:28:18.894 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0009.txt
+2025-05-15 21:28:25.580 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0010.txt
+2025-05-15 21:28:32.305 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0011.txt
+2025-05-15 21:28:37.801 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0012.txt
+2025-05-15 21:28:44.500 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0013.txt
+2025-05-15 21:28:50.083 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0014.txt
+2025-05-15 21:28:55.722 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0015.txt
+2025-05-15 21:29:02.494 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0016.txt
+2025-05-15 21:29:08.217 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0017.txt
+2025-05-15 21:29:14.754 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0018.txt
+2025-05-15 21:29:20.845 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0019.txt
+2025-05-15 21:29:27.574 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0020.txt
+2025-05-15 21:29:34.409 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0021.txt
+2025-05-15 21:29:38.093 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0022.txt
+2025-05-15 21:29:44.640 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0023.txt
+2025-05-15 21:29:52.178 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0024.txt
+2025-05-15 21:29:58.886 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0025.txt
+2025-05-15 21:30:05.472 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0026.txt
+2025-05-15 21:30:12.280 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0027.txt
+2025-05-15 21:30:18.947 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0028.txt
+2025-05-15 21:30:25.365 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0029.txt
+2025-05-15 21:30:32.720 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0030.txt
+2025-05-15 21:30:39.164 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0031.txt
+2025-05-15 21:30:46.816 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0032.txt
+2025-05-15 21:30:53.459 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0033.txt
+2025-05-15 21:31:01.130 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0034.txt
+2025-05-15 21:31:07.626 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0035.txt
+2025-05-15 21:31:14.313 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0036.txt
+2025-05-15 21:31:20.658 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0037.txt
+2025-05-15 21:31:27.144 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0038.txt
+2025-05-15 21:31:34.072 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0039.txt
+2025-05-15 21:31:40.891 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0040.txt
+2025-05-15 21:31:47.413 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0041.txt
+2025-05-15 21:31:54.040 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0042.txt
+2025-05-15 21:31:59.613 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0043.txt
+2025-05-15 21:32:06.178 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0044.txt
+2025-05-15 21:32:12.956 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0045.txt
+2025-05-15 21:32:18.567 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0046.txt
+2025-05-15 21:32:25.195 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0047.txt
+2025-05-15 21:32:31.905 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0048.txt
+2025-05-15 21:32:36.261 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results/0049.txt
+2025-05-15 21:34:11.640 | INFO     | __main__:main:154 - Args: Namespace(experiment_name='yolox_x_loaf', name=None, dist_backend='nccl', dist_url=None, batch_size=1, devices=1, local_rank=0, num_machines=1, machine_rank=0, exp_file='exps/example/loaf/yolox_x_loaf.py', fp16=True, fuse=True, trt=False, test=False, speed=False, opts=[], ckpt='pretrained/bytetrack_x_mot17.pth.tar', conf=0.01, nms=0.7, tsize=None, seed=None, track_thresh=0.6, track_buffer=30, match_thresh=0.9, min_box_area=100, mot20=False)
+2025-05-15 21:34:12.068 | INFO     | __main__:main:164 - Model Summary: Params: 99.00M, Gflops: 180.50
+2025-05-15 21:34:12.068 | INFO     | yolox.data.datasets.loaf:__init__:28 - loading annotations into memory...
+2025-05-15 21:34:15.060 | INFO     | yolox.data.datasets.loaf:__init__:28 - Done (t=2.99s)
+2025-05-15 21:34:15.061 | INFO     | pycocotools.coco:__init__:88 - creating index...
+2025-05-15 21:34:15.158 | INFO     | pycocotools.coco:__init__:88 - index created!
+2025-05-15 21:34:16.021 | INFO     | __main__:main:186 - loading checkpoint
+2025-05-15 21:34:16.238 | INFO     | __main__:main:191 - loaded checkpoint done.
+2025-05-15 21:34:16.238 | INFO     | __main__:main:197 - 	Fusing model...
+2025-05-15 21:34:23.793 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0000.txt
+2025-05-15 21:34:30.719 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0001.txt
+2025-05-15 21:34:37.397 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0002.txt
+2025-05-15 21:34:44.112 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0003.txt
+2025-05-15 21:34:50.930 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0004.txt
+2025-05-15 21:34:57.834 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0005.txt
+2025-05-15 21:35:03.543 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0006.txt
+2025-05-15 21:35:10.156 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0007.txt
+2025-05-15 21:35:16.915 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0008.txt
+2025-05-15 21:35:23.535 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0009.txt
+2025-05-15 21:35:30.247 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0010.txt
+2025-05-15 21:35:37.197 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0011.txt
+2025-05-15 21:35:42.878 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0012.txt
+2025-05-15 21:35:49.661 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0013.txt
+2025-05-15 21:35:55.341 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0014.txt
+2025-05-15 21:36:01.003 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0015.txt
+2025-05-15 21:36:07.813 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0016.txt
+2025-05-15 21:36:13.676 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0017.txt
+2025-05-15 21:36:20.323 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0018.txt
+2025-05-15 21:36:26.494 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0019.txt
+2025-05-15 21:36:33.355 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0020.txt
+2025-05-15 21:36:40.385 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0021.txt
+2025-05-15 21:36:44.150 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0022.txt
+2025-05-15 21:36:50.943 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0023.txt
+2025-05-15 21:36:58.569 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0024.txt
+2025-05-15 21:37:05.471 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0025.txt
+2025-05-15 21:37:12.294 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0026.txt
+2025-05-15 21:37:19.298 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0027.txt
+2025-05-15 21:37:26.207 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0028.txt
+2025-05-15 21:37:32.820 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0029.txt
+2025-05-15 21:37:40.348 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0030.txt
+2025-05-15 21:37:47.049 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0031.txt
+2025-05-15 21:37:54.827 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0032.txt
+2025-05-15 21:38:01.673 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0033.txt
+2025-05-15 21:38:09.447 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0034.txt
+2025-05-15 21:38:16.190 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0035.txt
+2025-05-15 21:38:22.987 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0036.txt
+2025-05-15 21:38:29.471 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0037.txt
+2025-05-15 21:38:36.193 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0038.txt
+2025-05-15 21:38:43.413 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0039.txt
+2025-05-15 21:38:50.361 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0040.txt
+2025-05-15 21:38:57.115 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0041.txt
+2025-05-15 21:39:04.075 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0042.txt
+2025-05-15 21:39:09.761 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0043.txt
+2025-05-15 21:39:16.545 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0044.txt
+2025-05-15 21:39:23.619 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0045.txt
+2025-05-15 21:39:29.371 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0046.txt
+2025-05-15 21:39:36.193 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0047.txt
+2025-05-15 21:39:43.094 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0048.txt
+2025-05-15 21:39:47.598 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0049.txt
+2025-05-15 21:39:54.347 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_train/0050.txt
+2025-05-15 21:39:54.380 | INFO     | yolox.evaluators.loaf_evaluator:evaluate_prediction:609 - Evaluate in main process...
+2025-05-15 21:39:55.754 | INFO     | yolox.evaluators.loaf_evaluator:evaluate_prediction:638 - Loading and preparing results...
+2025-05-15 21:39:56.801 | INFO     | yolox.evaluators.loaf_evaluator:evaluate_prediction:638 - DONE (t=1.05s)
+2025-05-15 21:39:56.802 | INFO     | pycocotools.coco:loadRes:363 - creating index...
+2025-05-15 21:39:56.886 | INFO     | pycocotools.coco:loadRes:363 - index created!
+2025-05-15 21:39:59.388 | INFO     | __main__:main:218 - 
+Average forward time: 7.15 ms, Average track time: 0.34 ms, Average inference time: 7.49 ms
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.027
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.077
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.010
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.019
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.048
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.135
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.015
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.046
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.060
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.046
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.101
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.243
+
+2025-05-15 21:42:12.558 | INFO     | __main__:main:154 - Args: Namespace(experiment_name='yolox_x_loaf', name=None, dist_backend='nccl', dist_url=None, batch_size=1, devices=1, local_rank=0, num_machines=1, machine_rank=0, exp_file='exps/example/loaf/yolox_x_loaf.py', fp16=True, fuse=True, trt=False, test=False, speed=False, opts=[], ckpt='pretrained/bytetrack_x_mot17.pth.tar', conf=0.01, nms=0.7, tsize=None, seed=None, track_thresh=0.6, track_buffer=30, match_thresh=0.9, min_box_area=100, mot20=False)
+2025-05-15 21:42:12.996 | INFO     | __main__:main:164 - Model Summary: Params: 99.00M, Gflops: 180.50
+2025-05-15 21:42:12.997 | INFO     | yolox.data.datasets.loaf:__init__:28 - loading annotations into memory...
+2025-05-15 21:42:13.953 | INFO     | yolox.data.datasets.loaf:__init__:28 - Done (t=0.96s)
+2025-05-15 21:42:13.953 | INFO     | pycocotools.coco:__init__:88 - creating index...
+2025-05-15 21:42:13.975 | INFO     | pycocotools.coco:__init__:88 - index created!
+2025-05-15 21:42:14.186 | INFO     | __main__:main:186 - loading checkpoint
+2025-05-15 21:42:14.415 | INFO     | __main__:main:191 - loaded checkpoint done.
+2025-05-15 21:42:14.415 | INFO     | __main__:main:197 - 	Fusing model...
+2025-05-15 21:42:20.567 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_test/0059.txt
+2025-05-15 21:42:26.296 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_test/0060.txt
+2025-05-15 21:42:32.491 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_test/0061.txt
+2025-05-15 21:42:38.929 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_test/0063.txt
+2025-05-15 21:42:45.391 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_test/0053.txt
+2025-05-15 21:42:50.765 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_test/0064.txt
+2025-05-15 21:42:57.245 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_test/0066.txt
+2025-05-15 21:43:04.828 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_test/0067.txt
+2025-05-15 21:43:11.276 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_test/0068.txt
+2025-05-15 21:43:17.737 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_test/0069.txt
+2025-05-15 21:43:24.767 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_test/0070.txt
+2025-05-15 21:43:31.285 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_test/0072.txt
+2025-05-15 21:43:37.693 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_test/0073.txt
+2025-05-15 21:43:43.997 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_test/0074.txt
+2025-05-15 21:43:50.410 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_test/0057.txt
+2025-05-15 21:43:50.438 | INFO     | yolox.evaluators.loaf_evaluator:evaluate_prediction:609 - Evaluate in main process...
+2025-05-15 21:43:50.971 | INFO     | yolox.evaluators.loaf_evaluator:evaluate_prediction:638 - Loading and preparing results...
+2025-05-15 21:43:51.377 | INFO     | yolox.evaluators.loaf_evaluator:evaluate_prediction:638 - DONE (t=0.41s)
+2025-05-15 21:43:51.377 | INFO     | pycocotools.coco:loadRes:363 - creating index...
+2025-05-15 21:43:51.403 | INFO     | pycocotools.coco:loadRes:363 - index created!
+2025-05-15 21:43:52.149 | INFO     | __main__:main:218 - 
+Average forward time: 7.23 ms, Average track time: 0.43 ms, Average inference time: 7.65 ms
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.036
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.104
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.018
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.026
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.069
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.206
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.019
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.061
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.077
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.057
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.132
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.261
+
+2025-05-15 21:45:09.109 | INFO     | __main__:main:154 - Args: Namespace(experiment_name='yolox_x_loaf', name=None, dist_backend='nccl', dist_url=None, batch_size=1, devices=1, local_rank=0, num_machines=1, machine_rank=0, exp_file='exps/example/loaf/yolox_x_loaf.py', fp16=True, fuse=True, trt=False, test=False, speed=False, opts=[], ckpt='pretrained/bytetrack_x_mot17.pth.tar', conf=0.01, nms=0.7, tsize=None, seed=None, track_thresh=0.6, track_buffer=30, match_thresh=0.9, min_box_area=100, mot20=False)
+2025-05-15 21:45:09.540 | INFO     | __main__:main:164 - Model Summary: Params: 99.00M, Gflops: 180.50
+2025-05-15 21:45:09.540 | INFO     | yolox.data.datasets.loaf:__init__:28 - loading annotations into memory...
+2025-05-15 21:45:10.170 | INFO     | yolox.data.datasets.loaf:__init__:28 - Done (t=0.63s)
+2025-05-15 21:45:10.170 | INFO     | pycocotools.coco:__init__:88 - creating index...
+2025-05-15 21:45:10.183 | INFO     | pycocotools.coco:__init__:88 - index created!
+2025-05-15 21:45:10.356 | INFO     | __main__:main:186 - loading checkpoint
+2025-05-15 21:45:10.578 | INFO     | __main__:main:191 - loaded checkpoint done.
+2025-05-15 21:45:10.578 | INFO     | __main__:main:197 - 	Fusing model...
+2025-05-15 21:45:16.793 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_val/0051.txt
+2025-05-15 21:45:23.386 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_val/0052.txt
+2025-05-15 21:45:29.980 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_val/0062.txt
+2025-05-15 21:45:35.392 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_val/0054.txt
+2025-05-15 21:45:41.793 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_val/0055.txt
+2025-05-15 21:45:48.315 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_val/0056.txt
+2025-05-15 21:45:54.916 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_val/0058.txt
+2025-05-15 21:46:01.404 | INFO     | yolox.evaluators.loaf_evaluator:write_results:39 - save results to ./YOLOX_outputs/yolox_x_loaf/track_results_val/0071.txt
+2025-05-15 21:46:01.428 | INFO     | yolox.evaluators.loaf_evaluator:evaluate_prediction:609 - Evaluate in main process...
+2025-05-15 21:46:01.778 | INFO     | yolox.evaluators.loaf_evaluator:evaluate_prediction:638 - Loading and preparing results...
+2025-05-15 21:46:02.052 | INFO     | yolox.evaluators.loaf_evaluator:evaluate_prediction:638 - DONE (t=0.27s)
+2025-05-15 21:46:02.053 | INFO     | pycocotools.coco:loadRes:363 - creating index...
+2025-05-15 21:46:02.070 | INFO     | pycocotools.coco:loadRes:363 - index created!
+2025-05-15 21:46:02.518 | INFO     | __main__:main:218 - 
+Average forward time: 7.28 ms, Average track time: 0.40 ms, Average inference time: 7.68 ms
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.032
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.084
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.018
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.020
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.068
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.285
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.018
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.054
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.069
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.056
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.123
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.320
+

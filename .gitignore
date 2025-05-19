@@ -137,7 +137,7 @@ docs/api
 *.onnx
 *.engine
 events.out.tfevents*
-pretrained
+pretrained/
 # YOLOX_outputs
 datasets/
 
@@ -147,3 +147,5 @@ datasets/
 # Do not ignore yolox/data/datasets
 !yolox/data/datasets/
 !yolox/data/datasets/**
+
+*.zip

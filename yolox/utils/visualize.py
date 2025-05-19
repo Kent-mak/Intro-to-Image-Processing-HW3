@@ -49,7 +49,7 @@ def get_color(idx):
     return color
 
 
-def plot_tracking(image, tlwhs, obj_ids, scores=None, frame_id=0, fps=0., ids2=None):
+def plot_tracking(image, tlwhs, obj_ids, scores=None, frame_id=0, fps=0., ids2=None, scene="default", filename="default.jpg", trajectories=None):
     im = np.ascontiguousarray(np.copy(image))
     im_h, im_w = im.shape[:2]
 
@@ -63,20 +63,37 @@ def plot_tracking(image, tlwhs, obj_ids, scores=None, frame_id=0, fps=0., ids2=N
     line_thickness = 3
 
     radius = max(5, int(im_w/140.))
-    cv2.putText(im, 'frame: %d fps: %.2f num: %d' % (frame_id, fps, len(tlwhs)),
-                (0, int(15 * text_scale)), cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 255), thickness=2)
+    cv2.putText(im, '%d | Scene: %d' % (filename, scene),
+                (0, int(15 * text_scale)), cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 255), thickness=text_thickness)
 
     for i, tlwh in enumerate(tlwhs):
         x1, y1, w, h = tlwh
         intbox = tuple(map(int, (x1, y1, x1 + w, y1 + h)))
+        x_center = int(x1 + w / 2)
+        y_center = int(y1 + h / 2)
+
         obj_id = int(obj_ids[i])
-        id_text = '{}'.format(int(obj_id))
+        id_text = 'ID: {}'.format(int(obj_id))
         if ids2 is not None:
             id_text = id_text + ', {}'.format(int(ids2[i]))
-        color = get_color(abs(obj_id))
-        cv2.rectangle(im, intbox[0:2], intbox[2:4], color=color, thickness=line_thickness)
-        cv2.putText(im, id_text, (intbox[0], intbox[1]), cv2.FONT_HERSHEY_PLAIN, text_scale, (0, 0, 255),
+
+        # color = get_color(abs(obj_id))
+        green = (0, 255, 0)
+        blue = (255, 0, 0)
+        cv2.rectangle(im, intbox[0:2], intbox[2:4], color=green, thickness=line_thickness)
+        cv2.putText(im, id_text, (intbox[0], intbox[1]), cv2.FONT_HERSHEY_PLAIN, text_scale, green,
                     thickness=text_thickness)
+
+        if trajectories is not None:
+            trajectories[obj_id].append((x_center, y_center))
+
+            # Draw line from previous to current point
+            if len(trajectories[obj_id]) >= 2:
+                for j in range(1, len(trajectories[obj_id])):
+                    pt1 = trajectories[obj_id][j - 1]
+                    pt2 = trajectories[obj_id][j]
+                    cv2.line(im, pt1, pt2, blue, thickness=2)
+
     return im
 
 

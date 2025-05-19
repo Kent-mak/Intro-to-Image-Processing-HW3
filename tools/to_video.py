@@ -22,16 +22,15 @@ def make_parser():
     parser = argparse.ArgumentParser("ByteTrack Visualization from TXT Results")
     
     # Original args
-    parser.add_argument("--demo", default="image", help="demo type, e.g., image, video")
-    # parser.add_argument("--exp_file", default=None, type=str, help="experiment config file")
+    parser.add_argument("--to", default="image", help="demo type, e.g., image, video")
     parser.add_argument("--name", default=None, type=str)
     parser.add_argument("--device", default="gpu", type=str)
-    parser.add_argument("--save_result", action="store_true")
     
     # New args for result visualization
     parser.add_argument("--result_file", type=str, help="Path to result txt file")
     parser.add_argument("--img_dir", type=str, help="Directory with input images (img1/)")
     parser.add_argument("--vis_folder", type=str, default="vis_results/vis", help="Where to save visualizations")
+    parser.add_argument("--vis_parent", type=str,  default="vis_results/vis", help="Where to group all visualization results")
     parser.add_argument("--video_path", type=str, default="vis_results/vis", help="Where to save videos")
 
     # Optional tracking args (for filtering small/vertical boxes)
@@ -56,6 +55,11 @@ def get_image_list(path):
 def image_demo_from_txt(result_file, img_dir, vis_folder, current_time, args):
     import csv
     from collections import defaultdict
+    
+    filename = os.path.basename(result_file)  # "MOT17-01-DPM.txt"
+    scene_id = filename.replace('-DPM.txt', '')  # "MOT17-01"
+    
+    trajectories = defaultdict(list)
 
     # 1. Load results from txt
     result_dict = defaultdict(list)  # {frame_id: [[tlwh, id, score], ...]}
@@ -74,6 +78,7 @@ def image_demo_from_txt(result_file, img_dir, vis_folder, current_time, args):
 
     # 3. Visualize
     for frame_id, img_path in enumerate(image_files, 1):
+        filename = os.path.basename(img_path)
         img = cv2.imread(img_path)
         if img is None:
             continue
@@ -93,16 +98,22 @@ def image_demo_from_txt(result_file, img_dir, vis_folder, current_time, args):
 
         timer.toc()
         online_im = plot_tracking(
-            img, online_tlwhs, online_ids, frame_id=frame_id, fps=1. / timer.average_time
+            img,
+            online_tlwhs,
+            online_ids,
+            frame_id=frame_id,
+            fps=1. / timer.average_time,
+            scene=scene_id,
+            filename=filename,
+            trajectories=trajectories
         )
 
         # Save visualization
-        if args.save_result:
-            # timestamp = time.strftime("%Y_%m_%d_%H_%M_%S", current_time)
-            # save_folder = osp.join(vis_folder, timestamp)
-            save_folder = vis_folder
-            os.makedirs(save_folder, exist_ok=True)
-            cv2.imwrite(osp.join(save_folder, osp.basename(img_path)), online_im)
+        # timestamp = time.strftime("%Y_%m_%d_%H_%M_%S", current_time)
+        # save_folder = osp.join(vis_folder, timestamp)
+        save_folder = vis_folder
+        os.makedirs(save_folder, exist_ok=True)
+        cv2.imwrite(osp.join(save_folder, osp.basename(img_path)), online_im)
 
         if frame_id % 20 == 0:
             logger.info(f"Processing frame {frame_id} ({1. / max(1e-5, timer.average_time):.2f} fps)")
@@ -112,14 +123,21 @@ def image_demo_from_txt(result_file, img_dir, vis_folder, current_time, args):
             break
 
 
-def img_2_video(vis_folder, video_path):
+def img_2_video(vis_parent, video_path):
     import cv2
     import os
     from glob import glob
+    from pathlib import Path
 
-    fps = 30
+    fps = 10
 
-    images = sorted(glob(os.path.join(vis_folder, "*.jpg")))  # or png
+    # images = sorted(glob(os.path.join(vis_parent, "*.jpg")))  # or png
+
+    all_images = list(Path(vis_parent).rglob("*.jpg"))
+
+    # Sort by directory name first, then file name
+    images = sorted(all_images, key=lambda p: (p.parent.name, p.name))
+    images = [str(p) for p in images]  # convert Path to string
 
     # Read first image to get size
     frame = cv2.imread(images[0])
@@ -135,7 +153,6 @@ def img_2_video(vis_folder, video_path):
     video_writer.release()
 
 
-
 def main(args):
 
     current_time = time.localtime()
@@ -148,12 +165,11 @@ def main(args):
             current_time=current_time,
             args=args
         )
+    elif args.demo == "video":
         img_2_video(
-            vis_folder=args.vis_folder,
+            vis_parent=args.vis_parent,
             video_path=args.video_path
         )
-    elif args.demo == "video" or args.demo == "webcam":
-        pass
 
 
 if __name__ == "__main__":

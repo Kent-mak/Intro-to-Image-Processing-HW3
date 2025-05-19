@@ -140,3 +140,10 @@ events.out.tfevents*
 pretrained
 # YOLOX_outputs
 datasets/
+
+# Ignore top-level datasets folder and everything in it
+datasets/
+
+# Do not ignore yolox/data/datasets
+!yolox/data/datasets/
+!yolox/data/datasets/**

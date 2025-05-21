@@ -105,9 +105,10 @@ def image_demo(result_file, img_dir, vis_folder, current_time, args):
     timer = Timer()
 
     # 3. Visualize
-    for img_path in image_files:
+    for frame_id, img_path in enumerate(image_files, 1):
         filename = os.path.basename(img_path)
-        frame_id = get_frame_number(filename)  # extract actual frame number
+        if args.dataset == "fisheye8k" or args.dataset == "loaf":
+            frame_id = get_frame_number(filename)  # extract actual frame number
 
         img = cv2.imread(img_path)
         if img is None:

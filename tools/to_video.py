@@ -190,7 +190,12 @@ def img_2_video(vis_parent, video_path, args):
 
     for img_path in images:
         frame = cv2.imread(img_path)
-        video_writer.write(frame)
+        if frame is None:
+            print(f"[WARNING] Could not read {img_path}")
+            continue
+
+        frame_resized = cv2.resize(frame, (width, height))
+        video_writer.write(frame_resized)
 
     video_writer.release()
 

@@ -4,6 +4,7 @@ import os.path as osp
 import time
 import cv2
 import torch
+import re
 
 from loguru import logger
 
@@ -27,6 +28,8 @@ def make_parser():
     parser.add_argument("--device", default="gpu", type=str)
     
     # New args for result visualization
+    parser.add_argument("--dataset", default="mot17", help="Used dataset")
+    parser.add_argument("--seq_id", default="seq", help="Current sequence(scene)")
     parser.add_argument("--result_file", type=str, help="Path to result txt file")
     parser.add_argument("--img_dir", type=str, help="Directory with input images (img1/)")
     parser.add_argument("--vis_folder", type=str, default="vis_results/vis", help="Where to save visualizations")
@@ -51,14 +54,29 @@ def get_image_list(path):
     return image_names
 
 
+def get_frame_number(filename):
+    # Extract number after the last underscore and before ".png" or ".jpg"
+    match = re.search(r'_(\d+)\.(png|jpg)$', filename, re.IGNORECASE)
+    return int(match.group(1)) if match else -1
 
-def image_demo_from_txt(result_file, img_dir, vis_folder, current_time, args):
+
+def image_demo(result_file, img_dir, vis_folder, current_time, args):
     import csv
     from collections import defaultdict
     
-    filename = os.path.basename(result_file)  # "MOT17-01-DPM.txt"
-    scene_id = filename.replace('-DPM.txt', '')  # "MOT17-01"
-    
+    if args.dataset == "mot17":
+        file = os.path.basename(result_file)  # "MOT17-01-DPM.txt"
+        scene_id = file.replace('-DPM.txt', '')  # "MOT17-01"
+    elif args.dataset == "fisheye8k":
+        file = os.path.basename(result_file)
+        scene_id = file.replace('.txt', '')
+    elif args.dataset == "loaf": 
+        file = os.path.basename(result_file)
+        scene_id = file.replace('.txt', '')
+    else:
+        file = os.path.basename(result_file)
+        scene_id = file.replace('.txt', '')
+
     trajectories = defaultdict(list)
 
     # 1. Load results from txt
@@ -73,12 +91,24 @@ def image_demo_from_txt(result_file, img_dir, vis_folder, current_time, args):
             result_dict[frame_id].append(([x, y, w, h], track_id, score))
 
     # 2. Sort image paths
-    image_files = sorted(get_image_list(img_dir))
+    image_files = get_image_list(img_dir)
+    if args.dataset == "mot17":
+        image_files = sorted(image_files)
+    elif args.dataset == "fisheye8k":
+        image_files = sorted(
+            [f for f in image_files if os.path.basename(f).startswith(scene_id)],
+            key=lambda f: get_frame_number(os.path.basename(f))
+        )
+    elif args.dataset == "loaf": 
+        image_files = sorted([f for f in image_files if os.path.basename(f).startswith(scene_id)])
+
     timer = Timer()
 
     # 3. Visualize
-    for frame_id, img_path in enumerate(image_files, 1):
+    for img_path in image_files:
         filename = os.path.basename(img_path)
+        frame_id = get_frame_number(filename)  # extract actual frame number
+
         img = cv2.imread(img_path)
         if img is None:
             continue
@@ -97,6 +127,9 @@ def image_demo_from_txt(result_file, img_dir, vis_folder, current_time, args):
                     online_scores.append(score)
 
         timer.toc()
+
+        # print(f"[DEBUG] Frame {frame_id} — Boxes: {len(online_tlwhs)}")
+
         online_im = plot_tracking(
             img,
             online_tlwhs,
@@ -123,7 +156,8 @@ def image_demo_from_txt(result_file, img_dir, vis_folder, current_time, args):
             break
 
 
-def img_2_video(vis_parent, video_path):
+
+def img_2_video(vis_parent, video_path, args):
     import cv2
     import os
     from glob import glob
@@ -133,11 +167,18 @@ def img_2_video(vis_parent, video_path):
 
     # images = sorted(glob(os.path.join(vis_parent, "*.jpg")))  # or png
 
-    all_images = list(Path(vis_parent).rglob("*.jpg"))
+    all_images = list(Path(vis_parent).rglob("*.jpg")) + list(Path(vis_parent).rglob("*.png"))
 
     # Sort by directory name first, then file name
-    images = sorted(all_images, key=lambda p: (p.parent.name, p.name))
-    images = [str(p) for p in images]  # convert Path to string
+    if args.dataset == "fisheye8k":
+        images = sorted(
+            all_images,
+            key=lambda p: (p.parent.name, get_frame_number(p.name))
+        )
+        images = [str(p) for p in images]  # Convert Path objects to strings
+    else:
+        images = sorted(all_images, key=lambda p: (p.parent.name, p.name))
+        images = [str(p) for p in images]  # convert Path to string
 
     # Read first image to get size
     frame = cv2.imread(images[0])
@@ -157,18 +198,19 @@ def main(args):
 
     current_time = time.localtime()
 
-    if args.demo == "image":
-        image_demo_from_txt(
+    if args.to == "image":
+        image_demo(
             result_file=args.result_file,
             img_dir=args.img_dir,
             vis_folder=args.vis_folder,
             current_time=current_time,
             args=args
         )
-    elif args.demo == "video":
+    elif args.to == "video":
         img_2_video(
             vis_parent=args.vis_parent,
-            video_path=args.video_path
+            video_path=args.video_path,
+            args=args
         )
 
 

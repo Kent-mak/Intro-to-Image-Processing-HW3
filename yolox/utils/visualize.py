@@ -63,8 +63,9 @@ def plot_tracking(image, tlwhs, obj_ids, scores=None, frame_id=0, fps=0., ids2=N
     line_thickness = 3
 
     radius = max(5, int(im_w/140.))
-    cv2.putText(im, '%d | Scene: %d' % (filename, scene),
+    cv2.putText(im, '%s | Scene: %s' % (filename, scene),
                 (0, int(15 * text_scale)), cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 255), thickness=text_thickness)
+    
 
     for i, tlwh in enumerate(tlwhs):
         x1, y1, w, h = tlwh

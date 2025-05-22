@@ -13,9 +13,12 @@ def process_file(input_path, output_file, append_string):
 
 def process_directory(input_dir, output_file):
     for filename in os.listdir(input_dir):
-        # if filename.endswith('-DPM.txt'):
-           
-        append_string = filename.split('.')[0]
+        
+        # if filename.endswith('-DPM.txt'): # uncomment for MOT17
+            # append_string = filename.split('-DPM.txt')[0] # uncomment for MOT17
+            # input_path = os.path.join(input_dir, filename)
+            # process_file(input_path, output_file, append_string)
+        append_string = filename.split('.')[0] # comment out for MOT17
         input_path = os.path.join(input_dir, filename)
         process_file(input_path, output_file, append_string)
 
